@@ -26,11 +26,14 @@ class _UploadPageState extends State<UploadPage> {
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
-        title: SizedBox(
-          height: 30,
-          child: Image.asset(
-            'assets/images/logo.png',
-            fit: BoxFit.contain,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: SizedBox(
+            height: 45,
+            child: Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.contain,
+            ),
           ),
         ),
       ),
