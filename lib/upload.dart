@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UploadPage extends StatefulWidget {
-  const UploadPage({Key? key}) : super(key: key);
+  const UploadPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _UploadPageState createState() => _UploadPageState();
 }
 
@@ -11,25 +12,25 @@ class _UploadPageState extends State<UploadPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  int _selectedCategory = 0;
+  final int _selectedCategory = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFF4E9),
+        backgroundColor: const Color(0xFFFEE7C5),
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: SizedBox(
-          height: 40,
-          child: CustomPaint(
-            painter: LogoPainter(),
-            size: Size(40, 40),
+          height: 30,
+          child: Image.asset(
+            'assets/images/logo.png',
+            fit: BoxFit.contain,
           ),
         ),
       ),
@@ -50,16 +51,20 @@ class _UploadPageState extends State<UploadPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Image 선택',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     IconButton(
-                      icon: Icon(Icons.add_circle, color: Colors.blue, size: 40),
+                      icon: const Icon(
+                        Icons.add_circle,
+                        color: Colors.blue,
+                        size: 40,
+                      ),
                       onPressed: () {
                         // 이미지 선택 로직 구현
                       },
@@ -67,101 +72,108 @@ class _UploadPageState extends State<UploadPage> {
                   ],
                 ),
               ),
-              SizedBox(height: 24),
-              
+              const SizedBox(height: 24),
+
               // 상품명 입력
-              Text('상품명', style: TextStyle(fontSize: 16)),
-              SizedBox(height: 8),
+              const Text('상품명', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
               TextField(
                 controller: _nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                 ),
               ),
-              SizedBox(height: 16),
-              
+              const SizedBox(height: 16),
+
               // 상품 가격 입력
-              Text('상품 가격', style: TextStyle(fontSize: 16)),
-              SizedBox(height: 8),
+              const Text('상품 가격', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
               TextField(
                 controller: _priceController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                 ),
               ),
-              SizedBox(height: 16),
-              
+              const SizedBox(height: 16),
+
               // 카테고리 선택
-              Text('카테고리', style: TextStyle(fontSize: 16)),
-              SizedBox(height: 8),
+              const Text('카테고리', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
               Row(
                 children: List.generate(
                   3,
                   (index) => Padding(
                     padding: const EdgeInsets.only(right: 8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          _selectedCategory = index;
-                        });
-                      },
-                      child: Container(
-                        width: 60,
-                        height: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _selectedCategory == index
-                              ? Colors.green
-                              : Colors.grey[300],
-                        ),
-                        child: Center(
-                          child: Text(
-                            '카테고리',
-                            style: TextStyle(
-                              color: _selectedCategory == index
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontSize: 12,
-                            ),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey[300],
+                            border: index == _selectedCategory
+                                ? Border.all(
+                                    color: const Color(0xFF76FF03),
+                                    width: 2,
+                                  )
+                                : null,
                           ),
                         ),
-                      ),
+                        const SizedBox(height: 4),
+                        const Text(
+                          '카테고리',
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 16),
-              
+              const SizedBox(height: 16),
+
               // 상품 상세설명
-              Text('상품 상세설명', style: TextStyle(fontSize: 16)),
-              SizedBox(height: 8),
+              const Text('상품 상세설명', style: TextStyle(fontSize: 16)),
+              const SizedBox(height: 8),
               TextField(
                 controller: _descriptionController,
                 maxLines: 5,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(12),
                 ),
               ),
-              SizedBox(height: 24),
-              
+              const SizedBox(height: 16),
+
               // 등록하기 버튼
-              Container(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // 등록 로직 구현
-                  },
-                  child: Text('등록하기'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFF4E9),
-                    foregroundColor: Colors.black,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Center(
+                  child: SizedBox(
+                    width: 200,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // 등록 로직 구현
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFFEE7C5),
+                        foregroundColor: Colors.black,
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Text('등록하기'),
                     ),
                   ),
                 ),
@@ -188,35 +200,44 @@ class LogoPainter extends CustomPainter {
     final paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 2.0;
+      ..strokeWidth = 3.0
+      ..strokeCap = StrokeCap.round;
 
     final orangePaint = Paint()
-      ..color = Color(0xFFFFAA00)
+      ..color = const Color(0xFFFFAA00)
       ..style = PaintingStyle.fill;
 
-    // 잎 모양 그리기
-    final path = Path()
-      ..moveTo(size.width * 0.2, size.height * 0.5)
-      ..quadraticBezierTo(
-        size.width * 0.5, size.height * 0.2,
-        size.width * 0.8, size.height * 0.5,
-      )
-      ..quadraticBezierTo(
-        size.width * 0.5, size.height * 0.8,
-        size.width * 0.2, size.height * 0.5,
-      );
+    // 메인 잎 모양 그리기
+    final path = Path();
 
-    // 작은 잎 모양 그리기
-    final smallLeafPath = Path()
-      ..moveTo(size.width * 0.6, size.height * 0.4)
-      ..quadraticBezierTo(
-        size.width * 0.65, size.height * 0.35,
-        size.width * 0.7, size.height * 0.4,
-      )
-      ..quadraticBezierTo(
-        size.width * 0.65, size.height * 0.45,
-        size.width * 0.6, size.height * 0.4,
-      );
+    // 시작점 (왼쪽 아래)
+    path.moveTo(size.width * 0.2, size.height * 0.7);
+
+    // 왼쪽에서 위로 곡선
+    path.quadraticBezierTo(
+      size.width * 0.2,
+      size.height * 0.3, // 제어점
+      size.width * 0.5,
+      size.height * 0.3, // 끝점
+    );
+
+    // 오른쪽으로 곡선
+    path.quadraticBezierTo(
+      size.width * 0.8,
+      size.height * 0.3, // 제어점
+      size.width * 0.8,
+      size.height * 0.7, // 끝점
+    );
+
+    // 작은 주황색 잎 모양
+    final smallLeafPath = Path();
+    smallLeafPath.moveTo(size.width * 0.6, size.height * 0.45);
+    smallLeafPath.quadraticBezierTo(
+      size.width * 0.7,
+      size.height * 0.4,
+      size.width * 0.65,
+      size.height * 0.5,
+    );
 
     canvas.drawPath(path, paint);
     canvas.drawPath(smallLeafPath, orangePaint);
