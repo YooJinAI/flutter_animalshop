@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'upload.dart';
+import 'package:provider/provider.dart';
+import 'pages/home_page.dart';
+import 'providers/product_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +12,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '동물 용품 쇼핑몰',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
+    return ChangeNotifierProvider(
+      create: (ctx) => ProductProvider(),
+      child: MaterialApp(
+        title: 'Flutter Animal Shop',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+        ),
+        home: const HomePage(),
       ),
-      home: const UploadPage(),
     );
   }
 }
